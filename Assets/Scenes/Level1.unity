@@ -6153,7 +6153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   activeDuration: 5
   cooldownDuration: 30
-  playerRenderer: {fileID: 0}
+  playerRenderer: {fileID: 531530402}
   blinkThreshold: 2
   blinkSpeed: 10
 --- !u!114 &829759707
@@ -6188,7 +6188,7 @@ MonoBehaviour:
   cooldownDuration: 30
   speedMultiplier: 2
   dashEffectObj: {fileID: 557656360}
-  playerRenderer: {fileID: 0}
+  playerRenderer: {fileID: 531530402}
   blinkThreshold: 2
   blinkSpeed: 15
 --- !u!1 &832575517
@@ -6964,6 +6964,10 @@ PrefabInstance:
       propertyPath: 'allSkins.Array.data[13]'
       value: 
       objectReference: {fileID: 11400000, guid: 816fc33e4ed0973448cbc947a7906402, type: 2}
+    - target: {fileID: 3078992740472864484, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 970
+      objectReference: {fileID: 0}
     - target: {fileID: 3403052734543904730, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_Name
       value: Percent_txt
@@ -7231,6 +7235,10 @@ PrefabInstance:
     - target: {fileID: 6201379474301146976, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 970
       objectReference: {fileID: 0}
     - target: {fileID: 6360571047811953304, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: sfxSlider
