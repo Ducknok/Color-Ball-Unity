@@ -6632,6 +6632,10 @@ PrefabInstance:
       propertyPath: m_MinValue
       value: 0.0001
       objectReference: {fileID: 0}
+    - target: {fileID: 85964377670979100, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 518685152258842460, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_Colors.m_NormalColor.a
       value: 1
