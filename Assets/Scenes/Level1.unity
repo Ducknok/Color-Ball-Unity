@@ -6969,8 +6969,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 816fc33e4ed0973448cbc947a7906402, type: 2}
     - target: {fileID: 3078992740472864484, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3078992740472864484, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 970
+      value: 919
       objectReference: {fileID: 0}
     - target: {fileID: 3403052734543904730, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_Name
@@ -7241,8 +7245,16 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 733
+      objectReference: {fileID: 0}
+    - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 970
+      value: 739.001
       objectReference: {fileID: 0}
     - target: {fileID: 6360571047811953304, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: sfxSlider
