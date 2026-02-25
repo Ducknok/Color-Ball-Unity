@@ -16,13 +16,23 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a245dae43aaf8bb419f2e3ec76d98c32, type: 3}
   upgradeType: 0
   levels:
-  - description: Double coins in 5s
+  - description: 'Double coins in 5s.
+
+      Cooldown: 30s'
     value: 5
-  - description: Double coins in 7.5s
+  - description: 'Double coins in 7.5s.
+
+      Cooldown: 30s'
     value: 7.5
-  - description: Double coins in 10s
+  - description: 'Double coins in 10s.
+
+      Cooldown: 30s'
     value: 10
-  - description: Double coins in 12.5s
+  - description: 'Double coins in 12.5s.
+
+      Cooldown: 30s'
     value: 12.5
-  - description: Double coins in 15s
+  - description: 'Double coins in 15s.
+
+      Cooldown: 30s'
     value: 15

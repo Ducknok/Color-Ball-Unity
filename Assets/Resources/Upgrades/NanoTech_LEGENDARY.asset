@@ -16,13 +16,23 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 99be4a770f5061b4aade7fa1df45c5e0, type: 3}
   upgradeType: 5
   levels:
-  - description: Reduce 30% speed for 7 seconds.
+  - description: 'Reduce 30% speed for 7 seconds.
+
+      Cooldown: 30s'
     value: 7
-  - description: Reduce 30% speed for 9 seconds.
-    value: 8
-  - description: Reduce 30% speed for 11 seconds.
+  - description: 'Reduce 30% speed for 9 seconds.
+
+      Cooldown: 30s'
     value: 9
-  - description: Reduce 30% speed for 13 seconds.
-    value: 10
-  - description: Reduce 30% speed for 15 seconds.
-    value: 12
+  - description: 'Reduce 30% speed for 11 seconds.
+
+      Cooldown: 30s'
+    value: 11
+  - description: 'Reduce 30% speed for 13 seconds.
+
+      Cooldown: 30s'
+    value: 13
+  - description: 'Reduce 30% speed for 15 seconds.
+
+      Cooldown: 30s'
+    value: 15

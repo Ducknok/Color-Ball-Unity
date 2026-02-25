@@ -18,11 +18,11 @@ MonoBehaviour:
   levels:
   - description: Gain an additional 0.2% experience points when destroying obstacles.
     value: 0.2
-  - description: Gain an additional 0.25% experience points when destroying obstacles.
-    value: 0.25
   - description: Gain an additional 0.3% experience points when destroying obstacles.
     value: 0.3
-  - description: Gain an additional 0.35% experience points when destroying obstacles.
-    value: 0.35
   - description: Gain an additional 0.4% experience points when destroying obstacles.
     value: 0.4
+  - description: Gain an additional 0.5% experience points when destroying obstacles.
+    value: 0.5
+  - description: Gain an additional 0.6% experience points when destroying obstacles.
+    value: 0.6

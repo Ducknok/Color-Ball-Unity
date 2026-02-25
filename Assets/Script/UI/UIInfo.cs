@@ -57,10 +57,17 @@ public class UIInfo : MonoBehaviour
         if (comboTxt != null) comboOriginalScale = comboTxt.transform.localScale;
     }
 
+    [System.Obsolete]
     private void Start()
     {
         if (this.comboTxt != null) this.comboTxt.gameObject.SetActive(false);
         this.expScrollbar.fillAmount = 0;
+        if(upgradeManager == null)
+        {
+            upgradeManager = FindObjectOfType<UIUpgrade>(true);
+        }
+
+        UpdateUI();
     }
 
     private void Update()

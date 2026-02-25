@@ -8,19 +8,15 @@ public class UIUpgrade : MonoBehaviour
     [SerializeField] private List<UpgradeCardData> listCard;
 
     [Header("Special Cards")]
-    [SerializeField] private UpgradeCardData goldRewardCard; // Kéo thẻ Tặng Vàng vào đây (Bắt buộc)
-    [SerializeField] private int maxActiveSkills = 4; // Giới hạn số lượng kỹ năng tối đa
+    [SerializeField] private UpgradeCardData goldRewardCard; 
+    [SerializeField] private int maxActiveSkills = 4;
 
     [Header("UI References")]
     [SerializeField] private GameObject upgradePanel;
     [SerializeField] private Transform upgradeContainer;
     [SerializeField] private UINameCard cardPrefab;
 
-    // Dictionary để lưu cấp độ hiện tại của từng kỹ năng
-    // Key: Loại kỹ năng, Value: Cấp độ hiện tại
     private Dictionary<UpgradeType, int> skillLevels = new Dictionary<UpgradeType, int>();
-
-    // Biến cờ để chặn việc gọi hàm 2 lần liên tiếp
     private bool isProcessing = false;
 
     private void Awake()
@@ -41,7 +37,6 @@ public class UIUpgrade : MonoBehaviour
 
     private void Start()
     {
-        if (upgradePanel != null) upgradePanel.SetActive(false);
         if (listCard == null || listCard.Count == 0) LoadAllCard();
     }
 
@@ -50,10 +45,8 @@ public class UIUpgrade : MonoBehaviour
     {
         UpgradeCardData[] loadedCards = Resources.LoadAll<UpgradeCardData>("Upgrades");
         listCard = new List<UpgradeCardData>(loadedCards);
-        Debug.Log($"Đã load xong {listCard.Count} thẻ!");
     }
 
-    // --- HÀM GỌI KHI LÊN CẤP ---
     public void ShowUpgradeOptions()
     {
         if (isProcessing || upgradePanel.activeSelf) return;
@@ -90,15 +83,11 @@ public class UIUpgrade : MonoBehaviour
         {
             var data = cards[i];
             UINameCard newCard = Instantiate(cardPrefab, upgradeContainer);
-
-            // Tính Level để hiển thị
-            // Nếu là thẻ Vàng (không nằm trong list skill) thì mặc định level 1 hoặc custom
             int currentLv = GetCurrentLevel(data.upgradeType);
             int nextLv = currentLv + 1;
 
             newCard.Setup(data, nextLv, OnCardSelected);
 
-            // Fix lỗi flash
             newCard.transform.localScale = Vector3.zero;
 
             yield return new WaitForSecondsRealtime(0.15f);
@@ -138,7 +127,6 @@ public class UIUpgrade : MonoBehaviour
             return;
         }
 
-        // Tăng cấp độ lên 1 cho Skill thường
         if (!skillLevels.ContainsKey(selectedCardData.upgradeType))
         {
             skillLevels[selectedCardData.upgradeType] = 0;
@@ -146,7 +134,6 @@ public class UIUpgrade : MonoBehaviour
         skillLevels[selectedCardData.upgradeType]++;
         int newLevel = skillLevels[selectedCardData.upgradeType];
 
-        //Debug.Log($"Nâng cấp: {selectedCardData.upgradeType} lên Lv.{newLevel}. Số skill đang có: {skillLevels.Count}/{maxActiveSkills}");
         if (UISkillHUD.Instance != null)
         {
             UISkillHUD.Instance.AddSkillIcon(selectedCardData);
@@ -159,8 +146,6 @@ public class UIUpgrade : MonoBehaviour
     private void ApplyUpgradeEffect(UpgradeCardData data, int level)
     {
         if (PlayerController.Instance == null && GameManager.Instance == null) return;
-
-        // Nếu là thẻ vàng đặc biệt
         if (data == goldRewardCard)
         {
             if (GameManager.Instance != null && GameManager.Instance.uiInfo != null)
@@ -171,8 +156,6 @@ public class UIUpgrade : MonoBehaviour
             }
             return;
         }
-
-        // Các skill khác
         var levelInfo = data.GetLevelData(level);
         float value = levelInfo.value;
 

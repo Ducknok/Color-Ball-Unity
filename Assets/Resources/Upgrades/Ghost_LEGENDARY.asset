@@ -16,15 +16,23 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 090efeb37cddeae4eabf158e9f1e0a96, type: 3}
   upgradeType: 3
   levels:
-  - description: It may not be destroyed within 5s.
-    value: 5
-  - description: It may not be destroyed within 6s.
-    value: 6
-  - description: It may not be destroyed within 7s.
-    value: 7
-  - description: It may not be destroyed within 8s.
-    value: 8
-  - description: 'It may not be destroyed within 10
+  - description: 'It may not be destroyed within 5s.
 
-      s.'
-    value: 10
+      Cooldown: 30s'
+    value: 5
+  - description: 'It may not be destroyed within 6s.
+
+      Cooldown: 30s'
+    value: 7
+  - description: 'It may not be destroyed within 7s.
+
+      Cooldown: 30s'
+    value: 9
+  - description: 'It may not be destroyed within 8s.
+
+      Cooldown: 30s'
+    value: 11
+  - description: 'It may not be destroyed within 10s.
+
+      Cooldown: 30s'
+    value: 15

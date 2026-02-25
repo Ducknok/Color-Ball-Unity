@@ -21,12 +21,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Start Game Countdown")]
     public TextMeshProUGUI countdownText;
-
-    // --- BIẾN LƯU TRẠNG THÁI CHO SETTING ---
     private bool wasPlayingBeforeSettings = false;
     private float previousTimeScale = 1f;
 
-    // --- BIẾN CỦA NEW INPUT SYSTEM ---
     private InputAction escapeAction;
 
     private void Awake()
@@ -83,7 +80,6 @@ public class GameManager : MonoBehaviour
 
         if (uiSetting == null)
         {
-            Debug.LogWarning("⚠️ Chưa kéo UI Setting vào GameManager!");
             return;
         }
 
@@ -148,10 +144,6 @@ public class GameManager : MonoBehaviour
             }
 
             countdownText.text = "GO!";
-        }
-        else
-        {
-            Debug.LogWarning("Chưa gắn Countdown Text vào GameManager!");
         }
 
         Time.timeScale = 1f;

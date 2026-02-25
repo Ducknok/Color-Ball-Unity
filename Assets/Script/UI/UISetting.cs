@@ -38,14 +38,14 @@ public class UISetting : MonoBehaviour
         }
         if (sensitivitySlider != null)
         {
-            sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 1.5f); // Đổi mặc định thành 1.5f
+            sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 3f);
             sensitivitySlider.onValueChanged.AddListener(OnSensitivityChanged);
             OnSensitivityChanged(sensitivitySlider.value);
         }
 
         if (hapticsToggle != null)
         {
-            bool isHapticsOn = PlayerPrefs.GetInt("Haptics", 1) == 1;
+            bool isHapticsOn = PlayerPrefs.GetInt("Haptics", 3) == 3;
             hapticsToggle.isOn = isHapticsOn;
             hapticsToggle.onValueChanged.AddListener(OnHapticsChanged);
         }
