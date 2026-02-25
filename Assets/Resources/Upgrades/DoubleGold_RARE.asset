@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f19b03ace9e644ea8f27e0f86aaac0, type: 3}
+  m_Name: DoubleGold_RARE
+  m_EditorClassIdentifier: Assembly-CSharp::UIUpgradeCard
+  rarity: 1
+  icon: {fileID: 21300000, guid: a245dae43aaf8bb419f2e3ec76d98c32, type: 3}
+  upgradeType: 0
+  levels:
+  - description: Double coins in 5s
+    value: 5
+  - description: Double coins in 7.5s
+    value: 7.5
+  - description: Double coins in 10s
+    value: 10
+  - description: Double coins in 12.5s
+    value: 12.5
+  - description: Double coins in 15s
+    value: 15

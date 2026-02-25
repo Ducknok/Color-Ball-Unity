@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec858b04e635b0b4e85d021d7a868887, type: 3}
+  m_Name: RARE_Lava
+  m_EditorClassIdentifier: Assembly-CSharp::SkinData
+  isOwned: 0
+  rarity: 1
+  skinName: Lava
+  material: {fileID: 2100000, guid: 1228defe5856cc84b8daae9358e175a1, type: 2}
+  price: 1900
