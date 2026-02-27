@@ -170,7 +170,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81c3fd62b6cadcc4181729841fdbbcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectPooler
-  pools: []
+  pools:
+  - tag: Ground
+    prefab: {fileID: 5639951387477848135, guid: 63039e4c107267e46b0266f2ad0f2f55, type: 3}
+    size: 10
+  - tag: Obstacle
+    prefab: {fileID: 7373143367619789134, guid: e9fbe281d642b8a40bf6453dd3e82e04, type: 3}
+    size: 30
+  - tag: Coin
+    prefab: {fileID: 7373143367619789134, guid: 271df16eac8487e4e993ea01614c0a80, type: 3}
+    size: 30
 --- !u!4 &71666406
 Transform:
   m_ObjectHideFlags: 0
@@ -226,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8727d7c34d247c4b9d167d3ec50679d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GroundSpawner
-  groundTile: {fileID: 5639951387477848135, guid: 63039e4c107267e46b0266f2ad0f2f55, type: 3}
+  groundTile: Ground
 --- !u!4 &169556898
 Transform:
   m_ObjectHideFlags: 0
@@ -6379,55 +6388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!1 &1048413705
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1048413707}
-  - component: {fileID: 1048413706}
-  m_Layer: 0
-  m_Name: Global Volume (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1048413706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048413705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: a86cd58ba82d7e04196b20d202e127f0, type: 2}
---- !u!4 &1048413707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048413705}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 213.06749, y: 446.93863, z: -241.19533}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1277823898 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4923138851756903329, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
@@ -6974,7 +6934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3078992740472864484, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 919
+      value: 970
       objectReference: {fileID: 0}
     - target: {fileID: 3403052734543904730, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_Name
@@ -7250,11 +7210,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 733
+      value: 303.6
       objectReference: {fileID: 0}
     - target: {fileID: 6249113665914599992, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 739.001
+      value: 970
       objectReference: {fileID: 0}
     - target: {fileID: 6360571047811953304, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: sfxSlider
@@ -7512,7 +7472,6 @@ SceneRoots:
   - {fileID: 531530404}
   - {fileID: 7960803082059642654}
   - {fileID: 258279431}
-  - {fileID: 1048413707}
   - {fileID: 169556898}
   - {fileID: 71666406}
   - {fileID: 2119076069}

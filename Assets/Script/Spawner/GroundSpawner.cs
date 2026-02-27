@@ -2,20 +2,49 @@
 
 public class GroundSpawner : MonoBehaviour
 {
-    public GameObject groundTile;
+    [Header("Settings")]
+    public string groundTile = "Ground";
+
+
     private Vector3 nextSpawnPoint;
 
-    public void SpawnTile()
-    {
-        GameObject newPrefab = Instantiate(this.groundTile, nextSpawnPoint,Quaternion.identity, this.transform);
-        this.nextSpawnPoint = newPrefab.transform.GetChild(1).transform.position;
-    }
     private void Start()
     {
-        for(int i = 0; i < 15; i++)
-        {
-            SpawnTile();
+        int spawnCount = 10;
 
+        if (ObjectPooler.Instance != null)
+        {
+            ObjectPooler.Pool groundPool =
+                ObjectPooler.Instance.pools.Find(p => p.tag == groundTile);
+
+            if (groundPool != null)
+                spawnCount = groundPool.size;
+        }
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            SpawnTile(false);
+        }
+    }
+
+
+    public void SpawnTile(bool spawnContent = true)
+    {
+        if (ObjectPooler.Instance == null) return;
+
+        GameObject newPrefab = ObjectPooler.Instance.SpawnFromPool(groundTile, nextSpawnPoint, Quaternion.identity);
+
+        if (newPrefab != null)
+        {
+            if (spawnContent)
+                newPrefab.GetComponent<GroundTile>().ResetGround();
+
+            Transform endPoint = newPrefab.transform.Find("NextSpawnPoint");
+
+            if (endPoint != null)
+                nextSpawnPoint = endPoint.position;
+            else
+                nextSpawnPoint.z += 100f;
         }
     }
 }

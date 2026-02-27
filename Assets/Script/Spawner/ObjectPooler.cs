@@ -1,28 +1,30 @@
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
+    // --- C·∫•u tr√∫c d·ªØ li·ªáu cho m·ªói lo·∫°i Pool ---
     [System.Serializable]
     public class Pool
     {
-        public string tag;     
-        public GameObject prefab; 
-        public int size;   
+        public string tag;         
+        public GameObject prefab;  
+        public int size;
     }
 
-    public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public static ObjectPooler Instance; 
 
-    // Singleton
-    public static ObjectPooler Instance;
+    public List<Pool> pools;
+    public Dictionary<string, Queue<GameObject>> poolDictionary; 
 
     private void Awake()
     {
         Instance = this;
+        InitializePools();
     }
 
-    private void Start()
+    private void InitializePools()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
@@ -33,7 +35,7 @@ public class ObjectPooler : MonoBehaviour
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false); // T?t ?i ch? d®¥ng
+                obj.SetActive(false);
                 obj.transform.SetParent(this.transform);
                 objectPool.Enqueue(obj);
             }
@@ -46,7 +48,7 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("Pool v?i tag " + tag + " kh?ng t?n t?i!");
+            Debug.LogWarning("Pool v·ªõi tag " + tag + " kh√¥ng t·ªìn t·∫°i!");
             return null;
         }
 
@@ -56,13 +58,14 @@ public class ObjectPooler : MonoBehaviour
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
-        // G?i h®§m OnEnable ho?c Reset tr?ng th®¢i n?u c?n (Quan tr?ng)
-        // IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
-        // if (pooledObj != null) pooledObj.OnObjectSpawn();
 
-        // X?p l?i v®§o cu?i h®§ng ??i ?? t®¢i s? d?ng sau n®§y
         poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
+    }
+
+    public void ReturnToPool(GameObject obj)
+    {
+        obj.SetActive(false);
     }
 }

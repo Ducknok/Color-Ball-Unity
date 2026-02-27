@@ -338,8 +338,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60021333898818452}
-  - component: {fileID: 2463211000017092301}
   - component: {fileID: 4525933513787681486}
+  - component: {fileID: 2463211000017092301}
   m_Layer: 0
   m_Name: GroundTile
   m_TagString: Ground
@@ -373,6 +373,32 @@ Transform:
   - {fileID: 7775846146941391626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4525933513787681486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639951387477848135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad08759813cf2f4db5731f236734578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundTile
+  obstacle: Obstacle
+  obstacleSpawnPoints:
+  - {fileID: 4781253480627214520}
+  - {fileID: 609796319657815190}
+  - {fileID: 3218296430380254049}
+  coin: Coin
+  coinSpawnPoints:
+  - {fileID: 1511228645880417047}
+  - {fileID: 5786019218465204646}
+  - {fileID: 8435846274896058288}
+  - {fileID: 2841484596050729213}
+  - {fileID: 904325652926002106}
+  - {fileID: 6665560128273036803}
+  coinSpawnChance: 0.3
 --- !u!65 &2463211000017092301
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -394,32 +420,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 505.0085, y: 235.52824, z: 360.37683}
   m_Center: {x: 0.57463074, y: -14.89695, z: 71.68936}
---- !u!114 &4525933513787681486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5639951387477848135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad08759813cf2f4db5731f236734578, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundTile
-  obstaclePrefab: {fileID: 7373143367619789134, guid: e9fbe281d642b8a40bf6453dd3e82e04, type: 3}
-  obstacleSpawnPoints:
-  - {fileID: 4781253480627214520}
-  - {fileID: 609796319657815190}
-  - {fileID: 3218296430380254049}
-  coinPrefab: {fileID: 7373143367619789134, guid: 271df16eac8487e4e993ea01614c0a80, type: 3}
-  coinSpawnPoints:
-  - {fileID: 1511228645880417047}
-  - {fileID: 5786019218465204646}
-  - {fileID: 8435846274896058288}
-  - {fileID: 2841484596050729213}
-  - {fileID: 904325652926002106}
-  - {fileID: 6665560128273036803}
-  coinSpawnChance: 0.3
 --- !u!1 &5786019218465204646
 GameObject:
   m_ObjectHideFlags: 0

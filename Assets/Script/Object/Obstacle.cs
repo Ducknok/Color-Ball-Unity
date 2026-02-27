@@ -10,7 +10,7 @@ public enum ColorType
 public class Obstacle : MonoBehaviour, IDeath
 {
     private PlayerController player;
-    [SerializeField] private float destroyOffset = 50f; // Giảm xuống 50 để đỡ tốn tài nguyên (1000 quá xa)
+    [SerializeField] private float destroyOffset = 50f;
     [Header("Particle")]
     [SerializeField] private Transform successHit;
 
@@ -21,14 +21,7 @@ public class Obstacle : MonoBehaviour, IDeath
 
     private void OnEnable()
     {
-        Color tmpColor = RandomColor();
-        MeshRenderer obstacleMess = GetComponent<MeshRenderer>();
-        if (obstacleMess != null)
-        {
-            obstacleMess.material.SetColor("_BaseColor", tmpColor);
-            obstacleMess.material.SetColor("_EmissionColor", tmpColor * 0.5f);
-            obstacleMess.material.EnableKeyword("_EMISSION");
-        }
+        this.ResetObstacle();
     }
 
     private void Update()
@@ -39,7 +32,7 @@ public class Obstacle : MonoBehaviour, IDeath
 
         if (distanceZ > destroyOffset)
         {
-            gameObject.SetActive(false);
+            ObjectPooler.Instance.ReturnToPool(gameObject);
         }
     }
 
@@ -134,15 +127,37 @@ public class Obstacle : MonoBehaviour, IDeath
                     var main = ps.main;
                     main.startColor = pColor * 2f;
                 }
-                Destroy(successEffect.gameObject, 1.5f); // Hủy VFX sau 1.5s
+                Destroy(successEffect.gameObject, 1.5f);
             }
         }
 
-        gameObject.SetActive(false);
+        ObjectPooler.Instance.ReturnToPool(this.gameObject);
     }
 
     public void OnPlayerDeath()
     {
         throw new System.NotImplementedException();
+    }
+    public void ResetObstacle()
+    {
+        Color tmpColor = RandomColor();
+        MeshRenderer obstacleMess = GetComponent<MeshRenderer>();
+        if (obstacleMess != null)
+        {
+            obstacleMess.material.SetColor("_BaseColor", tmpColor);
+            obstacleMess.material.SetColor("_EmissionColor", tmpColor * 0.5f);
+            obstacleMess.material.EnableKeyword("_EMISSION");
+        }
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            if (!rb.isKinematic)
+            {
+                rb.linearVelocity = Vector3.zero; 
+                rb.angularVelocity = Vector3.zero;
+            }
+            rb.isKinematic = true;  
+        }
     }
 }

@@ -12,43 +12,26 @@ public class CoinController : MonoBehaviour
     [SerializeField] private float flyHeight = 2.5f;
     [SerializeField] private float flyDuration = 0.4f;
 
-    // Thêm khoảng cách tự hủy để trả về Pool nếu người chơi bỏ qua
     [SerializeField] private float destroyOffset = 50f;
 
     private Transform targetPlayer;
     private bool isMagnetized = false;
     private bool isCollected = false;
-    private Transform playerTransform; // Để tính khoảng cách
-    private Vector3 originalScale; // Lưu kích thước gốc để reset
+    private Transform playerTransform; 
+    private Vector3 originalScale; 
 
     private void Awake()
     {
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null) playerTransform = playerObj.transform;
 
-        // Lưu lại kích thước ban đầu (1,1,1)
+
         originalScale = transform.localScale;
     }
 
-    // Hàm này chạy mỗi khi được lấy ra từ Pool
     private void OnEnable()
     {
-        isMagnetized = false;
-        isCollected = false;
-        targetPlayer = null;
-
-        // --- QUAN TRỌNG: Reset lại trạng thái ---
-        transform.localScale = originalScale; // Trả lại kích thước to (vì lúc ăn bị thu nhỏ)
-
-        Collider col = GetComponent<Collider>();
-        if (col != null) col.enabled = true; // Bật lại Collider để ăn được tiếp
-
-        // Reset vật lý nếu có
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
+        this.ResetCoin();
     }
 
     public void StartMagnetized(Transform playerTransform)
@@ -69,12 +52,11 @@ public class CoinController : MonoBehaviour
         if (isCollected) return;
 
 
-        // --- QUAN TRỌNG: Tự trả về Pool nếu bị bỏ lại quá xa ---
         if (playerTransform != null && !isMagnetized)
         {
             if (playerTransform.position.z - transform.position.z > destroyOffset)
             {
-                gameObject.SetActive(false); // Trả về Pool
+                ObjectPooler.Instance.ReturnToPool(gameObject);
                 return;
             }
         }
@@ -118,8 +100,7 @@ public class CoinController : MonoBehaviour
 
         if (instantCollect)
         {
-            // SỬA: Dùng SetActive(false) thay vì Destroy
-            gameObject.SetActive(false);
+            ObjectPooler.Instance.ReturnToPool(gameObject);
         }
         else
         {
@@ -147,6 +128,33 @@ public class CoinController : MonoBehaviour
 
             yield return null;
         }
-        gameObject.SetActive(false);
+        ObjectPooler.Instance.ReturnToPool(gameObject);
+    }
+
+    public void ResetCoin()
+    {
+        isMagnetized = false;
+        isCollected = false;
+        targetPlayer = null;
+
+        transform.localScale = originalScale;
+
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+        {
+            col.enabled = true;
+            col.isTrigger = true;
+        }
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            if (!rb.isKinematic)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+            rb.isKinematic = true;
+        }
     }
 }
