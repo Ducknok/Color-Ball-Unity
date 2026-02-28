@@ -40,12 +40,12 @@ public class UIInfo : MonoBehaviour
     [Header("References")]
     [SerializeField] private UIUpgrade upgradeManager;
 
-
     private Vector3 comboOriginalScale;
+    private Vector3 pointOriginalScale;
+    private Vector3 coinOriginalScale;
 
     private void Awake()
     {
-
         this.pointTxt = this.transform.Find("Point_txt/PointNumber_txt").GetComponent<TextMeshProUGUI>();
         this.comboTxt = this.transform.Find("Combo_txt").GetComponent<TextMeshProUGUI>();
         this.minuteTxt = this.transform.Find("Minute_txt").GetComponent<TextMeshProUGUI>();
@@ -55,14 +55,26 @@ public class UIInfo : MonoBehaviour
         this.levelTxt = this.expScrollbar.GetComponentInChildren<TextMeshProUGUI>();
 
         if (comboTxt != null) comboOriginalScale = comboTxt.transform.localScale;
+        if (pointTxt != null) pointOriginalScale = pointTxt.transform.localScale;
+        if (coinTxt != null) coinOriginalScale = coinTxt.transform.localScale;
     }
 
-    [System.Obsolete]
     private void Start()
     {
+        // Reset sạch sẽ mọi thông số khi bắt đầu ván mới
+        currentLevel = 1;
+        currentXP = 0;
+        maxXP = 100;
+        bonusXPMultiplier = 0f;
+        bonusCoinMultiplier = 1;
+        point = 0;
+        coin = 0;
+        timer = 0f;
+
         if (this.comboTxt != null) this.comboTxt.gameObject.SetActive(false);
-        this.expScrollbar.fillAmount = 0;
-        if(upgradeManager == null)
+        if (this.expScrollbar != null) this.expScrollbar.fillAmount = 0;
+
+        if (upgradeManager == null)
         {
             upgradeManager = FindObjectOfType<UIUpgrade>(true);
         }
@@ -73,51 +85,64 @@ public class UIInfo : MonoBehaviour
     private void Update()
     {
         this.pointTxt.text = this.point.ToString();
-        if (PlayerController.Instance.isGameActive == true)
+
+        if (PlayerController.Instance != null && PlayerController.Instance.isGameActive == true)
         {
             this.timer += Time.deltaTime;
             this.TimerCount(this.timer);
         }
+
         this.coinTxt.text = coin.ToString();
     }
 
     public void AddPoint()
     {
-        AudioManager.Instance.PlayScore();
+        if (AudioManager.Instance != null) AudioManager.Instance.PlayScore();
         this.point += 100;
-        pointTxt.transform.DOPunchScale(Vector3.one * 0.2f, scorePunchDuration);
+
+        // --- BẢO VỆ DOTWEEN: Dập tắt hiệu ứng cũ trước khi bóp phình lần nữa ---
+        if (pointTxt != null)
+        {
+            pointTxt.transform.DOKill(true);
+            pointTxt.transform.localScale = pointOriginalScale;
+            pointTxt.transform.DOPunchScale(Vector3.one * 0.2f, scorePunchDuration);
+        }
     }
+
     public void AddPointWithCombo(int index)
     {
         this.point += 100 * index;
-        // Hiệu ứng nảy cho điểm số
-        pointTxt.transform.DOPunchScale(Vector3.one * 0.2f, scorePunchDuration);
 
-        // Gọi hiệu ứng Combo
+        if (pointTxt != null)
+        {
+            pointTxt.transform.DOKill(true);
+            pointTxt.transform.localScale = pointOriginalScale;
+            pointTxt.transform.DOPunchScale(Vector3.one * 0.2f, scorePunchDuration);
+        }
+
         ShowComboUI(index);
     }
+
     public void ShowComboUI(int index)
     {
-        if (comboTxt != null && index > 1) // Thường combo > 1 mới hiện
+        if (comboTxt != null && index > 1)
         {
             comboTxt.gameObject.SetActive(true);
             comboTxt.text = "Combo x" + index;
 
-            // --- 1. HIỆU ỨNG RUNG CAMERA ---
             float shakeStrength = Mathf.Clamp(index * 0.05f, 0.1f, 0.6f);
             if (CameraShake.Instance != null) CameraShake.Instance.Shake(0.2f, shakeStrength);
 
-            // --- 2. HIỆU ỨNG TO RA XONG NHỎ LẠI (Punch) ---
-            comboTxt.transform.DOKill();
+            comboTxt.transform.DOKill(true);
             comboTxt.transform.localScale = comboOriginalScale;
             comboTxt.transform.DOPunchScale(Vector3.one * punchStrength, comboPunchDuration, 10, 1);
 
-            // --- 3. HIỆU ỨNG NHÁY ĐỎ ---
-            comboTxt.DOKill();
+            comboTxt.DOKill(true);
             comboTxt.color = comboFlashColor;
             comboTxt.DOColor(comboNormalColor, 0.5f).SetEase(Ease.InQuad);
         }
     }
+
     public void ResetComboUI()
     {
         if (comboTxt != null) comboTxt.gameObject.SetActive(false);
@@ -131,11 +156,19 @@ public class UIInfo : MonoBehaviour
         if (minuteTxt != null) minuteTxt.text = string.Format("{0:00} :", minutes);
         if (secondTxt != null) secondTxt.text = string.Format("{0:00}", seconds);
     }
+
     public void AddCoin(int amount)
     {
         this.coin += (amount * bonusCoinMultiplier);
-        coinTxt.transform.DOPunchScale(Vector3.one * 0.3f, coinPunchDuration);
+
+        if (coinTxt != null)
+        {
+            coinTxt.transform.DOKill(true);
+            coinTxt.transform.localScale = coinOriginalScale;
+            coinTxt.transform.DOPunchScale(Vector3.one * 0.3f, coinPunchDuration);
+        }
     }
+
     public void SetCoinMultiplier(int bonusCoin)
     {
         this.bonusCoinMultiplier = bonusCoin;
@@ -143,12 +176,9 @@ public class UIInfo : MonoBehaviour
 
     public void AddExperience(float amount)
     {
-        // Tính tổng XP: Gốc + (Gốc * %Thưởng)
         float totalXP = amount * (1f + bonusXPMultiplier);
-
         currentXP += totalXP;
 
-        // Vòng lặp check lên cấp
         while (currentXP >= maxXP)
         {
             currentXP -= maxXP;
@@ -157,6 +187,7 @@ public class UIInfo : MonoBehaviour
 
         UpdateUI();
     }
+
     private void LevelUp()
     {
         currentLevel++;
@@ -168,19 +199,16 @@ public class UIInfo : MonoBehaviour
         }
         UpdateUI();
     }
+
     public void SetBonusXP(float bonusPercent)
     {
         this.bonusXPMultiplier = bonusPercent;
-        //Debug.Log($"UIInfo: Đã cập nhật thưởng XP lên +{bonusPercent * 100}%");
     }
 
-
- 
     private void UpdateUI()
     {
         if (expScrollbar != null)
         {
-            // Tính tỷ lệ % để fill thanh XP (0 -> 1)
             expScrollbar.fillAmount = currentXP / maxXP;
         }
 
@@ -188,5 +216,12 @@ public class UIInfo : MonoBehaviour
         {
             levelTxt.text = "Lv. " + currentLevel;
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (pointTxt != null) pointTxt.transform.DOKill();
+        if (coinTxt != null) coinTxt.transform.DOKill();
+        if (comboTxt != null) comboTxt.transform.DOKill();
     }
 }

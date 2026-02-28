@@ -145,7 +145,7 @@ public class Obstacle : MonoBehaviour, IDeath
         if (obstacleMess != null)
         {
             obstacleMess.material.SetColor("_BaseColor", tmpColor);
-            obstacleMess.material.SetColor("_EmissionColor", tmpColor * 0.5f);
+            obstacleMess.material.SetColor("_EmissionColor", tmpColor * 2.5f);
             obstacleMess.material.EnableKeyword("_EMISSION");
         }
 

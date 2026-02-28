@@ -251,17 +251,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &216115701 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1136496090816791244, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
-  m_PrefabInstance: {fileID: 7960803082059642654}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &258279428
 GameObject:
   m_ObjectHideFlags: 0
@@ -6028,17 +6017,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &610732186 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4666058832793789603, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
-  m_PrefabInstance: {fileID: 7960803082059642654}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &692562429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3574145322720278845, guid: 68fe9ded73ac2564e9228c12d6e6d200, type: 3}
@@ -6125,10 +6103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917346da9693d2e4daab91ebbbf1edcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MagnetSkill
-  magnetRange: 10
+  magnetRange: 100
   coinLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   activeDuration: 5
   cooldownDuration: 30
 --- !u!114 &829759705
@@ -6647,11 +6625,11 @@ PrefabInstance:
     - target: {fileID: 777786484495958396, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: coin
       value: 
-      objectReference: {fileID: 216115701}
+      objectReference: {fileID: 0}
     - target: {fileID: 777786484495958396, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: highestScore
       value: 
-      objectReference: {fileID: 610732186}
+      objectReference: {fileID: 0}
     - target: {fileID: 815223990186190353, guid: d7f255a2189733e4498b32efd26c3671, type: 3}
       propertyPath: m_Colors.m_NormalColor.a
       value: 1

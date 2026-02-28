@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager Instance;
+    public event Action OnDataLoaded;
 
     [Header("Player Data")]
     public int TotalCoins { get; private set; }

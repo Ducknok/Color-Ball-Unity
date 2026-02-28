@@ -17,10 +17,8 @@ public class GroundTile : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float coinSpawnChance = 0.3f;
 
-    // Lưu lại object đã spawn để clear khi tile reuse
     private List<GameObject> spawnedObjects = new List<GameObject>();
 
-    // Lưu vị trí obstacle để tránh coin spawn trùng
     private Transform lastObstaclePoint;
 
     private void Awake()
@@ -30,7 +28,7 @@ public class GroundTile : MonoBehaviour
 
     public void ResetGround()
     {
-        ClearTile(); // 👈 Quan trọng: dọn tile trước khi spawn lại
+        ClearTile();
         StartCoroutine(WaitAndSpawn());
     }
 
@@ -98,7 +96,6 @@ public class GroundTile : MonoBehaviour
         Transform point = ChooseCoinPoint();
         if (point == null) return;
 
-        // Không cho spawn trùng vị trí obstacle
         if (lastObstaclePoint != null &&
             Vector3.Distance(point.position, lastObstaclePoint.position) < 0.1f)
         {
